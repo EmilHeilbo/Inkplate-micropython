@@ -75,6 +75,9 @@ text_dict = {
     "X": bytearray(b"\x05\x07c\x14\x08\x14c"),
     "Y": bytearray(b"\x05\x07`\x10\x0f\x10`"),
     "Z": bytearray(b"\x05\x07CEIQa"),
+    "Æ": bytearray(b"\x05\x07?D\x7fIA"),
+    "Ø": bytearray(b"\x05\x07>C]a>"),
+    "Å": bytearray(b"\x05\x07\x1f$d$\x1f"),
 
     "a": bytearray(b"\x05\x07\x02\x15\x15\x15\x0f"),
     "b": bytearray(b"\x05\x07\x7f\x05\x09\x09\x06"),
@@ -102,6 +105,9 @@ text_dict = {
     "x": bytearray(b"\x05\x07\x11\x09\x04\x09\x11"),
     "y": bytearray(b"\x05\x089\x05\x05\x05>"),
     "z": bytearray(b"\x05\x07\x11\x13\x15\x19\x11"),
+    "æ": bytearray(b"\x05\x07\x16\x15\x0f\x15\x0d"),
+    "ø": bytearray(b"\x05\x07\x0e\x13\x15\x19\x0e"),
+    "å": bytearray(b"\x05\x07\x02\x15U\x15\x0f"),
 
     "0": bytearray(b"\x05\x07>EIQ>"),
     "1": bytearray(b"\x05\x07\x11!\x7f\x01\x01"),
