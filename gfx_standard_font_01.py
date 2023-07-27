@@ -132,6 +132,7 @@ text_dict = {
     "@": bytearray(b"\x05\x07&IOA>"),
     "#": bytearray(b"\x05\x07\x14\x7f\x14\x7f\x14"),
     "$": bytearray(b"\x05\x072I\x7fI&"),
+    "€": bytearray(b'\x05\x07\x14\x1eUU"'),
     "&": bytearray(b'\x05\x076IU"\x05'),
     "*": bytearray(b"\x05\x07(\x10|\x10("),
     "-": bytearray(b"\x05\x07\x00\x08\x08\x08\x00"),
