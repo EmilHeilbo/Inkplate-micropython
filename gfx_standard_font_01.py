@@ -153,7 +153,7 @@ text_dict = {
     "BATA4": bytearray(b"\x0b\x07\x7fA]]]]AAA\x7f\x1c"),
     "BATA5": bytearray(b"\x0b\x07\x7fA]]]]]AA\x7f\x1c"),
     "BATA6": bytearray(b"\x0b\x07\x7fA]]]]]]A\x7f\x1c"),
-    "BATACHRG": bytearray(b"\x07\x08\x7fAIYyOMIA\x7f\x1c"),
+    "BATACHRG": bytearray(b"\x0b\x07\x7fAIYyOMIA\x7f\x1c"),
     "BATB0": bytearray(b"\x0b\x07\x7fAAAAAAAA\x7f\x1c"),
     "FULL": bytearray(b"\x05\x07\x7f\x7f\x7f\x7f\x7f"),
     "\n": bytearray(b"\x05\x07\x00\x00\x00\x00\x00"),
