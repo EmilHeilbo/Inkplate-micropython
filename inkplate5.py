@@ -1,3 +1,6 @@
+# MicroPython driver for Inkplate 5
+# By Soldered Electronics
+# Based on the original contribution by https://github.com/tve
 import time
 import micropython
 import framebuf
@@ -100,7 +103,7 @@ class _Inkplate:
         cls.GPIO0_PUP.digitalWrite(0)
 
         cls.VBAT_EN = gpioPin(cls._PCAL6416A, 9, modeOUTPUT)
-        cls.VBAT_EN.digitalWrite(1)
+        cls.VBAT_EN.digitalWrite(0)
 
         cls.SD_ENABLE = gpioPin(cls._PCAL6416A, 10, modeOUTPUT)
         cls.SD_ENABLE.digitalWrite(0)
@@ -154,18 +157,22 @@ class _Inkplate:
     # Read the battery voltage. Note that the result depends on the ADC calibration, and be a bit off.
     @classmethod
     def read_battery(cls):
-        cls.VBAT_EN.digitalWrite(0)
+        cls.VBAT_EN.digitalWrite(1)
         # Probably don't need to delay since Micropython is slow, but we do it anyway
         time.sleep_ms(5)
         value = cls.VBAT.read()
         print(value)
-        cls.VBAT_EN.digitalWrite(1)
+        cls.VBAT_EN.digitalWrite(0)
         result = (value / 4095.0) * 1.1 * 3.548133892 * 2
         return result
 
     # Read panel temperature. I varies +- 2 degree
     @classmethod
     def read_temperature(cls):
+
+        # Power on so TPS is visible on I2C
+        cls.power_on()
+
         # start temperature measurement and wait 5 ms
         cls._i2c.writeto_mem(TPS65186_addr, 0x0D, bytes((0x80,)))
         time.sleep_ms(5)
@@ -173,9 +180,10 @@ class _Inkplate:
         # request temperature data from panel
         cls._i2c.writeto(TPS65186_addr, bytearray((0x00,)))
         cls._temperature = cls._i2c.readfrom(TPS65186_addr, 1)
-
         # convert data from bytes to integer
         cls.temperatureInt = int.from_bytes(cls._temperature, "big", True)
+        
+        cls.power_off()
         return cls.temperatureInt
 
     # _tps65186_write writes an 8-bit value to a register
@@ -843,9 +851,13 @@ class Inkplate:
     def setRotation(self, x):
         self.rotation = x % 4
         if self.rotation == 0 or self.rotation == 2:
+            self.GFX.width = D_COLS
+            self.GFX.height = D_ROWS
             self._width = D_COLS
             self._height = D_ROWS
         elif self.rotation == 1 or self.rotation == 3:
+            self.GFX.width = D_ROWS
+            self.GFX.height = D_COLS
             self._width = D_ROWS
             self._height = D_COLS
 
